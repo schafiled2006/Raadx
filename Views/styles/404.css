@@ -1,0 +1,157 @@
+:root {
+    --font-regular: "sfpro regular", Arial, Helvetica, sans-serif;
+    --font-semibold: "sfpro semibold", Arial, Helvetica, sans-serif;
+    --font-logo: "hotel";
+
+    --bg-color: #111111;
+    --app-color: #FFFFFF;
+    --gray-bg-color: #424242;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+*,
+*:after,
+*:before {
+    box-sizing: inherit;
+}
+
+body {
+    line-height: 1.6;
+    font-size: 1.6rem;
+    font-family: var(--font-semibold);
+    background-color: var(--bg-color);
+    color: var(--app-color);
+}
+
+/*
+
+reset
+
+*/
+
+a {
+    text-decoration: none;
+    color: var(--app-color);
+
+}
+
+/*
+
+======================
+
+        menu
+
+======================
+
+*/
+
+.menu {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 2rem;
+    z-index: 100;
+}
+
+.menu-items {
+    width: 22rem;
+    height: 6rem;
+    backdrop-filter: blur(3px);
+    border-radius: 100rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.menu-search {
+    width: 6rem;
+    height: 6rem;
+    backdrop-filter: blur(3px);
+    border-radius: 100rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+.menu-items::before,
+.menu-search::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    border-radius: 9999px;
+    -webkit-box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+    box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7), inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+    background-color: rgba(15, 15, 15, 0.1);
+    pointer-events: none;
+}
+
+.menu-items::after,
+.menu-search::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: 9999px;
+    -webkit-backdrop-filter: blur(0px);
+    backdrop-filter: blur(0px);
+    -webkit-filter: url(#btn-glass);
+    filter: url(#btn-glass);
+    overflow: hidden;
+    isolation: isolate;
+    pointer-events: none;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.menu-item-img {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+}
+
+/*
+
+======================
+
+        main
+
+======================
+*/
+
+.main {}
+
+.main-img {
+    display: block;
+    width: 30rem;
+    border-radius: 3rem;
+    margin: 5rem auto;
+}
+
+.main-error {
+    color: #34A853;
+    text-align: center;
+    font-size: 6rem;
+}
+
+.main-caption {
+    text-align: center;
+    font-size: 2rem;
+}

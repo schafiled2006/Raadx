@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raad</title>
+    <link rel="icon" href="../images/Logo.png" type="image/png">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/mediaquery.css">
+    <link rel="stylesheet" href="../styles/font.css">
+    <link rel="stylesheet" href="../styles/signup.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <main>
+            <a href="../index.html">
+                <h2 class="title">Raad</h2>
+            </a>
+
+            <div class="inputs">
+                <div class="input-container">
+                    <h3 class="input-text">What’s your name?</h3>
+                    <input id="name-input" autocomplete="off" maxlength="12" class="input" type="text">
+                    <span id="name-error" class="span-error"></span>
+                </div>
+                <div class="input-container">
+                    <h3 class="input-text">Email</h3>
+                    <input autocomplete="off" id="email-input" class="input" type="text">
+                    <span id="email-error" class="span-error"></span>
+                </div>
+                <div class="input-container">
+                    <h3 class="input-text">Create a password</h3>
+                    <div class="input-password">
+                        <input autocomplete="off" id="password-input" class="input pass" type="password">
+                        <img class="input-img" id="input-img" src="../images/Sign up & Login/eye.png" alt="">
+                    </div>
+                    <span id="password-error" class="span-error"></span>
+                </div>
+            </div>
+
+            <div class="btn">
+                <a id="btn-link" class="btn-link">Create an account</a>
+                <a href="./login.html">
+                    <span class="btn-span">I Already have an account</span>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script type="text/javascript" src="../js/signup.js">
+
+    </script>
+</body>
+
+</html>

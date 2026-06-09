@@ -1,0 +1,121 @@
+:root {
+    --font-regular: "sfpro regular", Arial, Helvetica, sans-serif;
+    --font-semibold: "sfpro semibold", Arial, Helvetica, sans-serif;
+    --font-logo: "hotel";
+
+    --bg-color: #111111;
+    --app-color: #FFFFFF;
+    --gray-bg-color: #424242;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+*,
+*:after,
+*:before {
+    box-sizing: inherit;
+}
+
+body {
+    line-height: 1.6;
+    font-size: 1.6rem;
+    font-family: var(--font-semibold);
+    background-color: var(--bg-color);
+    color: var(--app-color);
+    margin: 0;
+    padding: 0;
+}
+
+/*
+
+reset
+
+*/
+
+a {
+    text-decoration: none;
+    color: var(--app-color);
+
+}
+
+/*
+
+====================
+
+        main
+        
+====================
+*/
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, .6)), url(../images/Auth/Background.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 2rem;
+    width: 18rem;
+    margin: 0 auto;
+    padding-top: 2rem;
+    text-align: center;
+}
+
+.logo {
+    font-family: var(--font-logo);
+    font-size: 10rem;
+    color: #34A853;
+    margin: 0 auto;
+    padding-top: 5rem;
+    text-align: center;
+}
+
+.btns {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 5rem;
+}
+
+.btn {
+    width: 32rem;
+    height: 5rem;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    border-radius: 3rem;
+    color: var(--app-color);
+    display: flex;
+    align-items: center;
+    padding: 0 5rem;
+    font-family: var(--font-regular);
+    border: solid .5px var(--app-color);
+}
+
+.Sbtn {
+    background-color: var(--app-color);
+    color: var(--bg-color);
+    justify-content: center;
+}
+
+.btn-img {
+    display: block;
+    width: 8%;
+}
+
+.btn-text {
+    display: block;
+    width: 92%;
+    text-align: center;
+}
+
+.Lbtn {
+    border: none;
+}

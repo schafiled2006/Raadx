@@ -1,0 +1,14 @@
+@font-face {
+    font-family: sfpro regular;
+    src: url(../fonts/SF-Pro-Display-Regular.otf);
+}
+
+@font-face {
+    font-family: sfpro semibold;
+    src: url(../fonts/SF-Pro-Display-Semibold.otf);
+}
+
+@font-face {
+    font-family: hotel;
+    src: url(../fonts/GRANDHOTEL-REGULAR.TTF);
+}

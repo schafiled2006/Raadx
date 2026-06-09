@@ -1,0 +1,165 @@
+:root {
+    --font-regular: "sfpro regular", Arial, Helvetica, sans-serif;
+    --font-semibold: "sfpro semibold", Arial, Helvetica, sans-serif;
+    --font-logo: "hotel";
+
+    --bg-color: #111111;
+    --app-color: #FFFFFF;
+    --gray-bg-color: #424242;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+*,
+*:after,
+*:before {
+    box-sizing: inherit;
+}
+
+body {
+    line-height: 1.6;
+    font-size: 1.6rem;
+    font-family: var(--font-semibold);
+    background-color: var(--bg-color);
+    color: var(--app-color);
+    margin: 0;
+    padding: 0;
+}
+
+/*
+
+reset
+
+*/
+
+a {
+    text-decoration: none;
+    color: var(--app-color);
+
+}
+
+/*
+
+===================
+
+        main
+
+===================
+
+*/
+
+.container {}
+
+.title {
+    text-align: center;
+    font-family: var(--font-logo);
+    font-size: 5rem;
+    color: #34A853;
+    margin-top: 2rem;
+}
+
+.inputs {
+    margin-top: 5rem;
+    width: 30rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.input-container {
+    padding-bottom: 1rem;
+}
+
+.input-text {
+    font-size: 1.8rem;
+    padding-bottom: 1rem;
+}
+
+.input-password {
+    display: flex;
+    align-items: center;
+    background-color: var(--gray-bg-color);
+    border-radius: 2rem;
+    padding: 0 2rem;
+    box-shadow: 0 0 10px #4e4e4e;
+    transition: all 350ms ease-in-out;
+}
+
+.input-img {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+}
+
+.input {
+    width: 30rem;
+    height: 6rem;
+    border-radius: 2rem;
+    border: none;
+    outline: none;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    background-color: var(--gray-bg-color);
+    color: var(--app-color);
+    box-shadow: 0 0 10px #4e4e4e;
+    transition: all 350ms ease-in-out;
+}
+
+.input:focus {
+    box-shadow: 0 0 10px #34A853;
+    transition: all 350ms ease-in-out;
+}
+
+.pass {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 1rem;
+    box-shadow: 0 0 0px #ffffff;
+
+}
+
+.pass:focus {
+    box-shadow: 0 0 0px #ffffff;
+}
+
+.input-password:has(.pass:focus) {
+    box-shadow: 0 0 10px #34A853;
+    transition: all 350ms ease-in-out;
+}
+
+.span-error {
+    display: block;
+    color: #912a2a;
+    font-family: var(--font-regular);
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.btn {
+    width: 12rem;
+    margin: 0rem auto;
+    margin-top: 8rem;
+
+}
+
+.btn-link {
+    padding: 2rem 5rem;
+    background-color: var(--app-color);
+    color: var(--bg-color);
+    border-radius: 3rem;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.btn-span {
+    display: block;
+    text-align: center;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    color: var(--gray-bg-color);
+    font-size: 1.4rem;
+}
