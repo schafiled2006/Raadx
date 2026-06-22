@@ -652,3 +652,53 @@ header {
 }
 
 @media (min-width: 1400px) {}
+/* Admin Uploads Section */
+
+.main-section_admin {
+    margin-top: 8rem;
+}
+
+.section-admin_title {
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+}
+
+.admin-song-card {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--gray-bg-color);
+    border-radius: 3rem;
+    align-items: center;
+    margin-top: 2rem;
+    overflow: hidden;
+}
+
+.admin-song-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.admin-song-cover {
+    width: 18rem;
+    height: 16rem;
+    object-fit: cover;
+}
+
+.admin-song-info h3 {
+    font-size: 1.5rem;
+}
+
+.admin-song-info p {
+    color: #CDCDCD;
+    font-size: 1.2rem;
+}
+
+.admin-song-btn {
+    padding-right: 2rem;
+}
+
+.admin-song-btn a {
+    color: white;
+    font-size: 2rem;
+}
