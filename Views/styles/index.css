@@ -43,9 +43,7 @@ a {
 /*
 
 ======================
-
-        menu
-
+  menu
 ======================
 */
 
@@ -129,9 +127,7 @@ a {
 /*
 
 ======================
-
-        header
-
+  header
 ======================
 */
 
@@ -215,19 +211,18 @@ header {
 
 .header-card {
     width: 15rem;
-    height: 6rem;
+    height: 8rem; 
     border-radius: 1.5rem;
     background-color: var(--gray-bg-color);
     display: flex;
     flex-grow: 1;
     align-items: center;
     text-align: center;
-
 }
 
 .header-card_img {
-    width: 6rem;
-    height: 6rem;
+    width: 8rem;  
+    height: 8rem; 
     display: block;
     border-radius: 1.5rem;
 }
@@ -246,17 +241,9 @@ header {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    width: 8rem;
+    width: 10rem; 
 }
 
-/*
-
-======================
-
-        main
-
-======================
-*/
 
 /* section 1 */
 
@@ -564,9 +551,7 @@ header {
 
 /*
 
-======================
-
-        footer
+======================footer
 
 ======================
 */
@@ -579,11 +564,8 @@ header {
 }
 
 /*
-
 ==========================
-
-        responsive
-
+responsive
 ==========================
 */
 
