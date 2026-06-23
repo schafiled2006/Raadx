@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raad Admin Panel</title>
+    <link rel="icon" href="../images/Logo.png" type="image/png">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/font.css">
+    <style>
+        :root {
+            --font-regular: "sfpro regular", Arial, Helvetica, sans-serif;
+            --font-semibold: "sfpro semibold", Arial, Helvetica, sans-serif;
+            --bg-color: #111111;
+            --app-color: #FFFFFF;
+            --gray-bg-color: #424242;
+        }
+        html { box-sizing: border-box; font-size: 62.5%; }
+        *, *:after, *:before { box-sizing: inherit; }
+        body {
+            font-size: 1.6rem;
+            font-family: var(--font-semibold);
+            background-color: var(--bg-color);
+            color: var(--app-color);
+            padding: 3rem 2rem 12rem;
+        }
+        a { text-decoration: none; color: var(--app-color); }
+
+        /* header */
+        .admin-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 4rem;
+        }
+        .admin-header a { color: #424242; font-size: 1.4rem; }
+        .admin-header h1 { font-size: 2.8rem; }
+        .admin-logo {
+            font-family: "hotel", serif;
+            font-size: 4rem;
+            color: #34A853;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 4rem;
+            border-bottom: 1px solid #2a2a2a;
+            padding-bottom: 1rem;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            color: #424242;
+            font-size: 1.4rem;
+            font-family: var(--font-semibold);
+            cursor: pointer;
+            padding: 0.8rem 2rem;
+            border-radius: 1rem;
+            transition: all 0.15s;
+        }
+        .tab-btn:hover { color: #fff; }
+        .tab-btn.active {
+            color: #fff;
+            background: #1f1f1f;
+        }
+
+        .tab-section { display: none; }
+        .tab-section.active { display: block; }
+
+        /* فرم */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .form-group.full { grid-column: 1 / -1; }
+        label {
+            font-size: 1.2rem;
+            color: #888;
+            font-family: var(--font-regular);
+        }
+        input, select {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 1rem;
+            color: #fff;
+            font-size: 1.4rem;
+            padding: 1.2rem 1.6rem;
+            font-family: var(--font-semibold);
+            width: 100%;
+            transition: border-color 0.15s;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #34A853;
+        }
+        select option { background: #1a1a1a; }
+
+        .upload-zone {
+            border: 2px dashed #2a2a2a;
+            border-radius: 1.5rem;
+            padding: 3rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.15s;
+            position: relative;
+            background: #161616;
+        }
+        .upload-zone:hover, .upload-zone.has-file {
+            border-color: #34A853;
+            background: #0f1a11;
+        }
+        .upload-zone input[type=file] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+        .upload-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .upload-label { font-size: 1.3rem; color: #666; font-family: var(--font-regular); }
+        .upload-label strong { color: #34A853; }
+        .file-name {
+            font-size: 1.2rem;
+            color: #34A853;
+            margin-top: 1rem;
+            word-break: break-all;
+        }
+
+        /* progress */
+        .progress-bar {
+            height: 4px;
+            background: #222;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 1rem;
+            display: none;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #34A853;
+            border-radius: 2px;
+            transition: width 0.3s;
+            width: 0%;
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 3rem;
+            padding: 1.6rem;
+            background: #34A853;
+            color: #0d1a0f;
+            border: none;
+            border-radius: 1.5rem;
+            font-size: 1.6rem;
+            font-family: var(--font-semibold);
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .submit-btn:hover { background: #22c55e; }
+        .submit-btn:disabled {
+            background: #1f3d28;
+            color: #4a7a5c;
+            cursor: not-allowed;
+        }
+
+        /* نمکایش دهنده ارور*/
+        .alert {
+            padding: 1.4rem 1.8rem;
+            border-radius: 1rem;
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            display: none;
+            font-family: var(--font-regular);
+        }
+        .alert.success {
+            background: #0f2d16;
+            border: 1px solid #166534;
+            color: #4ade80;
+            display: block;
+        }
+        .alert.error {
+            background: #2d0f0f;
+            border: 1px solid #7f1d1d;
+            color: #f87171;
+            display: block;
+        }
+
+        .songs-list { display: flex; flex-direction: column; gap: 2rem; }
+
+        .admin-song-card {
+            display: flex;
+            justify-content: space-between;
+            background-color: var(--gray-bg-color);
+            border-radius: 3rem;
+            align-items: center;
+            overflow: hidden;
+        }
+        .admin-song-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .admin-song-cover {
+            width: 16rem;
+            height: 14rem;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .admin-song-cover-placeholder {
+            width: 16rem;
+            height: 14rem;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            flex-shrink: 0;
+        }
+        .admin-song-info h3 { font-size: 1.6rem; margin-bottom: 0.4rem; }
+        .admin-song-info p { color: #CDCDCD; font-size: 1.3rem; font-family: var(--font-regular); }
+        .admin-song-genre {
+            font-size: 1.1rem;
+            background: #1f3d28;
+            color: #4ade80;
+            padding: 0.4rem 1.2rem;
+            border-radius: 2rem;
+            margin-top: 0.8rem;
+            display: inline-block;
+        }
+        .admin-song-right {
+            padding-right: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 1rem;
+        }
+        .delete-btn {
+            background: none;
+            border: 1px solid #555;
+            color: #888;
+            cursor: pointer;
+            padding: 0.6rem 1.4rem;
+            border-radius: 1rem;
+            font-size: 1.2rem;
+            font-family: var(--font-semibold);
+            transition: all 0.15s;
+        }
+        .delete-btn:hover { color: #f87171; border-color: #f87171; background: #2d0f0f; }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .stat {
+            background: #1a1a1a;
+            border: 1px solid #222;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            text-align: center;
+        }
+        .stat-num { font-size: 3rem; font-weight: 700; color: #34A853; }
+        .stat-label { font-size: 1.1rem; color: #555; margin-top: 0.4rem; font-family: var(--font-regular); }
+
+        .empty-state {
+            text-align: center;
+            padding: 8rem 2rem;
+            color: #444;
+        }
+        .empty-state .icon { font-size: 5rem; margin-bottom: 1.5rem; }
+        .empty-state p { font-size: 1.5rem; }
+
+        .spinner {
+            display: inline-block;
+            width: 1.8rem; height: 1.8rem;
+            border: 2px solid transparent;
+            border-top-color: #0d1a0f;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            vertical-align: middle;
+            margin-right: 0.8rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .menu {
+            display: flex;
+            gap: 2rem;
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 2rem;
+            z-index: 100;
+        }
+        .menu-items {
+            width: 22rem;
+            height: 6rem;
+            backdrop-filter: blur(3px);
+            border-radius: 100rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            position: relative;
+        }
+        .menu-search {
+            width: 6rem;
+            height: 6rem;
+            backdrop-filter: blur(3px);
+            border-radius: 100rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            position: relative;
+        }
+        .menu-items::before, .menu-search::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px;
+            box-shadow: inset 2px 2px 0px -2px rgba(255,255,255,0.7), inset 0 0 3px 1px rgba(255,255,255,0.7);
+            background-color: rgba(15,15,15,0.1);
+            pointer-events: none;
+        }
+        .menu-item { display: flex; align-items: center; justify-content: center; }
+        .menu-item-img { display: block; width: 2rem; height: 2rem; cursor: pointer; }
+        .menu-select { opacity: 0.4; }
+
+        @media (max-width: 520px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full { grid-column: 1; }
+            .admin-song-cover, .admin-song-cover-placeholder { width: 10rem; height: 10rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-header">
+        <a href="../index.html">← Back</a>
+        <p class="admin-logo">Raad</p>
+        <span style="width:4rem"></span>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('upload', this)">Upload Song</button>
+        <button class="tab-btn" onclick="switchTab('list', this)">Songs List</button>
+    </div>
+
+    <!-- اپلود تب -->
+    <div id="tab-upload" class="tab-section active">
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Song Title *</label>
+                <input id="song-title" type="text" placeholder="e.g. Хочу перемен">
+            </div>
+            <div class="form-group">
+                <label>Artist *</label>
+                <input id="artist" type="text" placeholder="e.g. Kino">
+            </div>
+            <div class="form-group">
+                <label>Album</label>
+                <input id="album" type="text" placeholder="Album name (optional)">
+            </div>
+            <div class="form-group">
+                <label>Genre</label>
+                <select id="genre">
+                    <option value="">Select genre</option>
+                    <option value="Pop">Pop</option>
+                    <option value="Rock">Rock</option>
+                    <option value="Hip-Hop">Hip-Hop</option>
+                    <option value="R&B">R&B</option>
+                    <option value="Jazz">Jazz</option>
+                    <option value="Classical">Classical</option>
+                    <option value="Electronic">Electronic</option>
+                    <option value="Alternative">Alternative</option>
+                    <option value="Indie">Indie</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group full">
+                <label>MP3 File *</label>
+                <div class="upload-zone" id="audio-zone">
+                    <input type="file" id="audio-file" accept="audio/mp3,audio/mpeg">
+                    <div class="upload-label">Drop your MP3 here or <strong>browse</strong></div>
+                    <div class="file-name" id="audio-name"></div>
+                    <div class="progress-bar" id="audio-progress">
+                        <div class="progress-fill" id="audio-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group full">
+                <label>Cover Image</label>
+                <div class="upload-zone" id="cover-zone">
+                    <input type="file" id="cover-file" accept="image/*">
+                    <div class="upload-label">Cover image <strong>(optional)</strong></div>
+                    <div class="file-name" id="cover-name"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="alert-box" class="alert"></div>
+        <button class="submit-btn" id="submit-btn" onclick="uploadSong()">Upload Song</button>
+
+    </div>
+
+    <!-- لیست تب  -->
+    <div id="tab-list" class="tab-section">
+        <div class="stat-grid">
+            <div class="stat">
+                <div class="stat-num" id="stat-total">—</div>
+                <div class="stat-label">Total Songs</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num" id="stat-artists">—</div>
+                <div class="stat-label">Artists</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num" id="stat-albums">—</div>
+                <div class="stat-label">Albums</div>
+            </div>
+        </div>
+        <div id="songs-container" class="songs-list">
+            <div class="empty-state">
+                <div class="icon"></div>
+                <p>Loading songs...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu">
+        <div class="menu-items">
+            <a href="../index.html">
+                <div class="menu-item">
+                    <img class="menu-item-img" src="../images/menu-home.png" alt="">
+                </div>
+            </a>
+            <a href="#">
+                <div class="menu-item">
+                    <img class="menu-item-img" src="../images/menu-library.png" alt="">
+                </div>
+            </a>
+            <a href="#">
+                <div class="menu-item menu-select">
+                    <img class="menu-item-img" src="../images/menu-add.png" alt="">
+                </div>
+            </a>
+        </div>
+        <div class="menu-search">
+            <a href="#">
+                <div class="menu-item">
+                    <img class="menu-item-img" src="../images/menu-search.png" alt="">
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = "https://jxyyvqkmyeythspvnwid.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_Qlw9rzbRm6VhDHmIk3SzUA_uxSpO6sf";
+        const { createClient } = supabase;
+        const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        const AUDIO_BUCKET = 'music-files';
+        const COVER_BUCKET = 'covers';
+        const TABLE = 'songs';
+
+        document.getElementById('audio-file').addEventListener('change', function () {
+            const f = this.files[0];
+            if (f) {
+                document.getElementById('audio-name').textContent = f.name;
+                document.getElementById('audio-zone').classList.add('has-file');
+            }
+        });
+        document.getElementById('cover-file').addEventListener('change', function () {
+            const f = this.files[0];
+            if (f) {
+                document.getElementById('cover-name').textContent = f.name;
+                document.getElementById('cover-zone').classList.add('has-file');
+            }
+        });
+
+        function switchTab(tab, el) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+            el.classList.add('active');
+            document.getElementById('tab-' + tab).classList.add('active');
+            if (tab === 'list') loadSongsList();
+        }
+
+        function showAlert(msg, type) {
+            const el = document.getElementById('alert-box');
+            el.textContent = msg;
+            el.className = 'alert ' + type;
+            if (type === 'success') setTimeout(() => el.className = 'alert', 5000);
+        }
+
+        function uniqueName(filename) {
+            return Date.now() + '_' + Math.random().toString(36).slice(2, 6) + '_' + filename.replace(/\s/g, '_');
+        }
+
+        async function uploadSong() {
+            const title = document.getElementById('song-title').value.trim();
+            const artist = document.getElementById('artist').value.trim();
+            const album = document.getElementById('album').value.trim();
+            const genre = document.getElementById('genre').value;
+            const audioFile = document.getElementById('audio-file').files[0];
+            const coverFile = document.getElementById('cover-file').files[0];
+
+            if (!title || !artist || !audioFile) {
+                showAlert('Title, artist and MP3 file are required.', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span>Uploading...';
+
+            const progressBar = document.getElementById('audio-progress');
+            const fill = document.getElementById('audio-fill');
+            progressBar.style.display = 'block';
+
+            try {
+                fill.style.width = '20%';
+
+                // upload audio
+                const audioPath = uniqueName(audioFile.name);
+                const { error: audioErr } = await db.storage.from(AUDIO_BUCKET).upload(audioPath, audioFile);
+                if (audioErr) throw new Error('Audio upload failed: ' + audioErr.message);
+                fill.style.width = '55%';
+
+                const { data: audioData } = db.storage.from(AUDIO_BUCKET).getPublicUrl(audioPath);
+
+                // اپلود کاور (اختیاری)
+                let coverUrl = null;
+                if (coverFile) {
+                    const coverPath = uniqueName(coverFile.name);
+                    const { error: covErr } = await db.storage.from(COVER_BUCKET).upload(coverPath, coverFile);
+                    if (covErr) throw new Error('Cover upload failed: ' + covErr.message);
+                    const { data: covData } = db.storage.from(COVER_BUCKET).getPublicUrl(coverPath);
+                    coverUrl = covData.publicUrl;
+                }
+
+                fill.style.width = '80%';
+
+                // انتقال  به db
+                const { error: dbErr } = await db.from(TABLE).insert({
+                    title,
+                    artist,
+                    album: album || null,
+                    genre: genre || null,
+                    audio_url: audioData.publicUrl,
+                    cover_url: coverUrl,
+                    created_at: new Date().toISOString()
+                });
+                if (dbErr) throw new Error('DB insert failed: ' + dbErr.message);
+
+                fill.style.width = '100%';
+                showAlert(`"${title}" uploaded successfully!`, 'success');
+
+                //  ریست فرم
+                ['song-title', 'artist', 'album'].forEach(id => document.getElementById(id).value = '');
+                document.getElementById('genre').value = '';
+                document.getElementById('audio-file').value = '';
+                document.getElementById('cover-file').value = '';
+                document.getElementById('audio-name').textContent = '';
+                document.getElementById('cover-name').textContent = '';
+                document.getElementById('audio-zone').classList.remove('has-file');
+                document.getElementById('cover-zone').classList.remove('has-file');
+                setTimeout(() => { progressBar.style.display = 'none'; fill.style.width = '0%'; }, 1200);
+
+            } catch (e) {
+                showAlert(e.message, 'error');
+                progressBar.style.display = 'none';
+                fill.style.width = '0%';
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = 'Upload Song';
+            }
+        }
+
+        async function loadSongsList() {
+            const container = document.getElementById('songs-container');
+            container.innerHTML = '<div class="empty-state"><div class="icon">⏳</div><p>Loading...</p></div>';
+
+            const { data, error } = await db.from(TABLE).select('*').order('created_at', { ascending: false });
+
+            if (error) {
+                container.innerHTML = `<div class="empty-state"><div class="icon">⚠️</div><p>${error.message}</p></div>`;
+                return;
+            }
+
+            document.getElementById('stat-total').textContent = data.length;
+            document.getElementById('stat-artists').textContent = new Set(data.map(s => s.artist)).size;
+            document.getElementById('stat-albums').textContent = new Set(data.filter(s => s.album).map(s => s.album)).size;
+
+            if (!data.length) {
+                container.innerHTML = '<div class="empty-state"><div class="icon">🎶</div><p>No songs uploaded yet.</p></div>';
+                return;
+            }
+
+            container.innerHTML = data.map(s => `
+                <div class="admin-song-card" id="song-${s.id}">
+                    <div class="admin-song-left">
+                        ${s.cover_url
+                            ? `<img class="admin-song-cover" src="${s.cover_url}" alt="${s.title}" onerror="this.style.display='none'">`
+                            : `<div class="admin-song-cover-placeholder">🎵</div>`
+                        }
+                        <div class="admin-song-info">
+                            <h3>${s.title}</h3>
+                            <p>${s.artist}${s.album ? ' · ' + s.album : ''}</p>
+                            ${s.genre ? `<span class="admin-song-genre">${s.genre}</span>` : ''}
+                        </div>
+                    </div>
+                    <div class="admin-song-right">
+                        <audio controls style="width:18rem">
+                            <source src="${s.audio_url}">
+                        </audio>
+                        <button class="delete-btn" onclick="deleteSong('${s.id}')">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function deleteSong(id) {
+            if (!confirm('Delete this song?')) return;
+            const { error } = await db.from(TABLE).delete().eq('id', id);
+            if (error) { alert('Error: ' + error.message); return; }
+            document.getElementById('song-' + id)?.remove();
+            const remaining = document.querySelectorAll('.admin-song-card').length;
+            document.getElementById('stat-total').textContent = remaining;
+            if (!remaining) {
+                document.getElementById('songs-container').innerHTML = '<div class="empty-state"><div class="icon">🎶</div><p>No songs uploaded yet.</p></div>';
+            }
+        }
+    </script>
+</body>
+</html>
