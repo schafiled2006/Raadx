@@ -214,7 +214,7 @@
             object-fit: cover;
             flex-shrink: 0;
         }
-        .admin-song-cover-placeholder {
+        .admin-song-cover {
             width: 16rem;
             height: 14rem;
             background: #333;
@@ -337,7 +337,7 @@
         @media (max-width: 520px) {
             .form-grid { grid-template-columns: 1fr; }
             .form-group.full { grid-column: 1; }
-            .admin-song-cover, .admin-song-cover-placeholder { width: 10rem; height: 10rem; }
+            .admin-song-cover, .admin-song-cover { width: 10rem; height: 10rem; }
         }
     </style>
 </head>
@@ -360,15 +360,15 @@
         <div class="form-grid">
             <div class="form-group">
                 <label>Song Title *</label>
-                <input id="song-title" type="text" placeholder="e.g. Хочу перемен">
+                <input id="song-title" type="text" ="e.g. Хочу перемен">
             </div>
             <div class="form-group">
                 <label>Artist *</label>
-                <input id="artist" type="text" placeholder="e.g. Kino">
+                <input id="artist" type="text" ="e.g. Kino">
             </div>
             <div class="form-group">
                 <label>Album</label>
-                <input id="album" type="text" placeholder="Album name (optional)">
+                <input id="album" type="text"="Album name (optional)">
             </div>
             <div class="form-group">
                 <label>Genre</label>
@@ -615,7 +615,7 @@
                     <div class="admin-song-left">
                         ${s.cover_url
                             ? `<img class="admin-song-cover" src="${s.cover_url}" alt="${s.title}" onerror="this.style.display='none'">`
-                            : `<div class="admin-song-cover-placeholder">🎵</div>`
+                            : `<div class="admin-song-cover"></div>`
                         }
                         <div class="admin-song-info">
                             <h3>${s.title}</h3>

@@ -58,7 +58,7 @@ async function loadAdminSongs() {
                 <div class="admin-song-left">
                     ${song.cover_url
                         ? `<img class="admin-song-cover" src="${song.cover_url}" alt="${song.title}" onerror="this.style.display='none'">`
-                        : `<div class="admin-song-cover" style="background:#333;display:flex;align-items:center;justify-content:center;font-size:3rem">🎵</div>`
+                        : `<div class="admin-song-cover" style="background:#333;display:flex;align-items:center;justify-content:center;font-size:3rem"></div>`
                     }
                     <div class="admin-song-info">
                         <h3>${song.title}</h3>
