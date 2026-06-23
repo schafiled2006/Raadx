@@ -3,8 +3,7 @@ const app = require("./app");
 const { log } = require("node:console");
 require("dotenv").config();
 
-const port = process.env.PORT;
-
+const port = process.env.PORT || 3000;
 (async () => {
     mongoose.connect(process.env.MONGO_URL);
     console.log("database connected");

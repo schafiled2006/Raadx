@@ -211,13 +211,15 @@ header {
 
 .header-card {
     width: 15rem;
-    height: 8rem; 
+    height: 8rem;
     border-radius: 1.5rem;
     background-color: var(--gray-bg-color);
     display: flex;
     flex-grow: 1;
     align-items: center;
     text-align: center;
+    overflow: hidden; 
+    max-width: 20rem; 
 }
 
 .header-card_img {
@@ -241,7 +243,8 @@ header {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    width: 10rem; 
+    width: 100%; 
+    padding: 0 1rem; 
 }
 
 
@@ -636,6 +639,8 @@ responsive
 @media (min-width: 1400px) {}
 /* Admin Uploads Section */
 
+/* Admin Uploads Section */
+
 .main-section_admin {
     margin-top: 8rem;
 }
@@ -647,10 +652,9 @@ responsive
 
 .admin-song-card {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     background-color: var(--gray-bg-color);
-    border-radius: 3rem;
-    align-items: center;
+    border-radius: 2rem;
     margin-top: 2rem;
     overflow: hidden;
 }
@@ -662,9 +666,10 @@ responsive
 }
 
 .admin-song-cover {
-    width: 18rem;
-    height: 16rem;
+    width: 10rem;
+    height: 10rem;
     object-fit: cover;
+    flex-shrink: 0;
 }
 
 .admin-song-info h3 {
@@ -677,13 +682,14 @@ responsive
 }
 
 .admin-song-btn {
-    padding-right: 2rem;
+    padding: 1rem 1.5rem 1.5rem;
+    width: 100%;
 }
 
-.admin-song-btn a {
-    color: white;
-    font-size: 2rem;
+.admin-song-btn audio {
+    width: 100%;
 }
+
 audio {
     filter: invert(1);
 }
